@@ -10,6 +10,7 @@ constx = 100
 consty = 100
 spill = []
 tur = 1
+klick = False
 
 class TTT():
     def __init__(self, x:int, y:int) -> None:
@@ -58,16 +59,20 @@ while True:
         if hendelse.type == pg.QUIT:
             pg.quit()
             raise SystemExit
+        if hendelse.type == pg.MOUSEBUTTONUP:
+            mus_x, mus_y = pg.mouse.get_pos()
+            klick = True
         
-        mus_x, mus_y = pg.mouse.get_pos()
 
         for i in range(len(spill)):
-            spill[i].sjekkPos(mus_x, mus_y, tur)
+            if klick == True:
+                spill[i].sjekkPos(mus_x, mus_y, tur)
+
 
             spill[i].draw(vindu)
 
 
 
-
+        klick = False
         pg.display.flip()
         klokke.tick(FPS)

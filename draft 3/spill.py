@@ -145,7 +145,13 @@ while True:
                             storspill[i].elements[5] += storspill[i].nett[j].state
                             storspill[i].elements[6] += storspill[i].nett[j].state
                         
-                        
+                        for q in range(len(storspill[i].elements)):
+                            if storspill[i].elements[i] == 3:
+                                print("Spiller 1 vant dette nettet")
+                            elif storspill[i].elements[i] == -3:
+                                print("Spiller 1 vant dette nettet")
+
+
 
             if tur == 1 and klick == False:
                 tur = 2

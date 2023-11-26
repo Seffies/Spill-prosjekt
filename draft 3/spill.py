@@ -19,6 +19,16 @@ pg.display.set_caption("Ultimate Tic Tac Toe")
 
 class Rutenett():
     def __init__(self, ruter, x:int, y:int) -> None:
+        self.elements = {
+            0, #øverste vannrett
+            0, #midt vannrett
+            0, #laveste vannrett
+            0, #venstre loddrett
+            0, #midt loddrett
+            0, #høyre loddrett
+            0, #skrå venstre til høyre
+            0, #skrå høyre til venstre
+        }
         self.bredde = 120
         self.hoyde = 120
         self.nett = []
@@ -59,17 +69,19 @@ class TTT():
     def sjekkPos(self, mus_x, mus_y, tur):
         if self.x - self.radius < mus_x < self.x + self.radius and self.y - self.radius < mus_y < self.y + self.radius:
             if self.state == 0:
+                print("denne er ikke tatt")
                 if tur == 1:
                     self.aktivfarg = self.spiller1farg
                     self.state += self.spiller1score 
-                if tur == 2: 
+                elif tur == 2: 
                     self.aktivfarg = self.spiller2farg
                     self.state += self.spiller2score 
-                print("denne stemmer")
-            return True
-
+                return True
+            else: 
+                return False
         else:
             return False
+
                     
 
 
@@ -95,7 +107,45 @@ while True:
                     print(storspill[i].nett[j].sjekkPos(mus_x, mus_y, tur))
                     if storspill[i].nett[j].sjekkPos(mus_x, mus_y, tur) == True:
                         aktivind = j
+
                         print("denne fikk index", aktivind)
+                        
+                        #burde gjort denne om til en prosedyre som tar inn en int, for tenkte å bruke denne for å vise store rutenett, men bruker den bare for lille her
+                        if aktivind == 1:
+                            storspill[i].elements[0] += storspill[i].nett[j].state
+                            storspill[i].elements[3] += storspill[i].nett[j].state
+                            storspill[i].elements[6] += storspill[i].nett[j].state
+                        elif aktivind ==  2:
+                            storspill[i].elements[0] += storspill[i].nett[j].state
+                            storspill[i].elements[4] += storspill[i].nett[j].state
+                        elif aktivind ==  3:
+                            storspill[i].elements[0] += storspill[i].nett[j].state
+                            storspill[i].elements[5] += storspill[i].nett[j].state
+                            storspill[i].elements[7] += storspill[i].nett[j].state
+                        elif aktivind ==  4:
+                            storspill[i].elements[1] += storspill[i].nett[j].state
+                            storspill[i].elements[3] += storspill[i].nett[j].state
+                        elif aktivind ==  5:
+                            storspill[i].elements[1] += storspill[i].nett[j].state
+                            storspill[i].elements[4] += storspill[i].nett[j].state
+                            storspill[i].elements[6] += storspill[i].nett[j].state
+                            storspill[i].elements[7] += storspill[i].nett[j].state
+                        elif aktivind ==  6:
+                            storspill[i].elements[1] += storspill[i].nett[j].state
+                            storspill[i].elements[5] += storspill[i].nett[j].state
+                        elif aktivind ==  7:
+                            storspill[i].elements[2] += storspill[i].nett[j].state
+                            storspill[i].elements[3] += storspill[i].nett[j].state
+                            storspill[i].elements[7] += storspill[i].nett[j].state
+                        elif aktivind ==  8:
+                            storspill[i].elements[2] += storspill[i].nett[j].state
+                            storspill[i].elements[4] += storspill[i].nett[j].state
+                        else: 
+                            storspill[i].elements[2] += storspill[i].nett[j].state
+                            storspill[i].elements[5] += storspill[i].nett[j].state
+                            storspill[i].elements[6] += storspill[i].nett[j].state
+                        
+                        
 
             if tur == 1 and klick == False:
                 tur = 2
